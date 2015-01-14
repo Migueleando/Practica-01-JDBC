@@ -3,7 +3,7 @@ import java.util.*;
 
 import com.mysql.jdbc.DatabaseMetaData;
 
-public class Conexion {
+public class BBDD {
 
 	public static void main(String[] args) throws SQLException {
 		String url = "jdbc:mysql://localhost:3306/QUIZIT";
