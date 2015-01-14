@@ -37,8 +37,9 @@ public class BBDD {
 	 * @param respuesta2
 	 * @param respuesta3
 	 * @param respuesta4
+	 * @throws SQLException 
 	 */
-	public void AñadirPregunta (Pregunta pregunta, Respuesta respuesta1, Respuesta respuesta2, Respuesta respuesta3, Respuesta respuesta4) {		
+	public void AñadirPregunta (Question pregunta, Answer respuesta1, Answer respuesta2, Answer respuesta3, Answer respuesta4) throws SQLException {		
 				
 		// Insertamos en las tablas
 			// Inserción de Pregunta
@@ -54,7 +55,7 @@ public class BBDD {
 		    IdRespuesta++;
 		    preparedStmtRespuesta1.setInt    (1, IdRespuesta);
 		    preparedStmtRespuesta1.setString (2, respuesta1.getText());
-		    preparedStmtRespuesta1.setInt    (3, respuesta1.isCorrect());
+		    preparedStmtRespuesta1.setBoolean(3, respuesta1.isCorrect());
 		    
 		    //Inserción de Respuesta 2
 		    String queryANSWER2 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?)";		
@@ -62,7 +63,7 @@ public class BBDD {
 		    IdRespuesta++;
 		    preparedStmtRespuesta2.setInt    (1, IdRespuesta);
 		    preparedStmtRespuesta2.setString (2, respuesta1.getText());
-		    preparedStmtRespuesta2.setInt    (3, respuesta1.isCorrect());
+		    preparedStmtRespuesta2.setBoolean    (3, respuesta1.isCorrect());
 		    
 		    //Inserción de Respuesta 3
 		    String queryANSWER3 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?)";		
@@ -70,7 +71,7 @@ public class BBDD {
 		    IdRespuesta++;
 		    preparedStmtRespuesta3.setInt    (1, IdRespuesta);
 		    preparedStmtRespuesta3.setString (2, respuesta1.getText());
-		    preparedStmtRespuesta3.setInt    (3, respuesta1.isCorrect());
+		    preparedStmtRespuesta3.setBoolean    (3, respuesta1.isCorrect());
 		    
 		    //Inserción de Respuesta 4
 		    String queryANSWER4 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?)";		
@@ -78,7 +79,7 @@ public class BBDD {
 		    IdRespuesta++;
 		    preparedStmtRespuesta4.setInt    (1, IdRespuesta);
 		    preparedStmtRespuesta4.setString (2, respuesta1.getText());
-		    preparedStmtRespuesta4.setInt    (3, respuesta1.isCorrect());
+		    preparedStmtRespuesta4.setBoolean(3, respuesta1.isCorrect());
 	    
 	    // Ejecutamos los statements
 	    preparedStmtPregunta.execute();
