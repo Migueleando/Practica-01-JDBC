@@ -19,7 +19,7 @@ public class Answer implements Serializable {
 		return this.text = text;
 	}
 
-	public String getText(String text) {
+	public String getText() {
 		return text;
 	}
 
@@ -28,7 +28,7 @@ public class Answer implements Serializable {
 
 	}
 
-	public boolean getIs_correct(boolean is_correct) {
+	public boolean isCorrect() {
 		return is_correct;
 
 	}
