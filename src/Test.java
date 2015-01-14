@@ -1,63 +1,63 @@
 import java.io.Serializable;
 
 public class Test implements Serializable {
-    private int id, score, numQuest;
-    private String name, date;
+    private int idTest, score, numQuest;
+    private String nameTest, date;
 
     public Test() {
-	id = 0;
+	idTest = 0;
 	score = 0;
 	numQuest = 0;
-	name = "";
+	nameTest = "";
 	date = "";
     }
 
-    public Test(int id, String name, String date, int score, int numQuest) {
-	this.id = id;
-	this.name = name;
+    public Test(int idTest, String nameTest, String date, int score, int numQuest) {
+	this.idTest = idTest;
+	this.nameTest = nameTest;
 	this.date = date;
 	this.score = score;
 	this.numQuest = numQuest;
     }
 
     public int getId() {
-        return id;
+	return idTest;
     }
 
     public void setId(int id) {
-        this.id = id;
+	this.idTest = id;
     }
 
     public int getScore() {
-        return score;
+	return score;
     }
 
     public void setScore(int score) {
-        this.score = score;
+	this.score = score;
     }
 
     public int getNumQuest() {
-        return numQuest;
+	return numQuest;
     }
 
     public void setNumQuest(int numQuest) {
-        this.numQuest = numQuest;
+	this.numQuest = numQuest;
     }
 
     public String getName() {
-        return name;
+	return nameTest;
     }
 
     public void setName(String name) {
-        this.name = name;
+	this.nameTest = name;
     }
 
     public String getDate() {
-        return date;
+	return date;
     }
 
     public void setDate(String date) {
-        this.date = date;
-    } 
-    
+	this.date = date;
+    }
+
 }
