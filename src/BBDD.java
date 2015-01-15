@@ -114,7 +114,11 @@ public class BBDD {
 	    idTest++;
 	    preparedStmtTest.setInt    (1, idTest);
 	    preparedStmtTest.setString (2, pregunta.getText());
-	    
+	    ResultSet rs = preparedStmtTest.executeQuery(queryTEST);
+		while (rs.next()) {
+			System.out.println("Las cinco preguntas son: " + rs);
+		}
+		
 	    con.close();
 	}
 
