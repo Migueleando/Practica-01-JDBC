@@ -116,15 +116,15 @@ public class BBDD{
 	    // Para cada resultado devuelto me guardo el id_question y la
 	    // pregunta
 	    while (rs1.next()) {
-		int NumeroDePregunta = rs1.getInt("id_question");
-		String TextoPregunta = rs1.getString("text");
+		int NumeroDePregunta = rs1.getInt("ID_QUESTION");
+		String TextoPregunta = rs1.getString("TEXT");
 		// Y saco todas las respuestas pertenecientes a dicha pregunta y
 		// que sean correctas (sera solo 1)
 		Statement stmt2 = con.createStatement();
 		ResultSet rs2 = stmt2
-			.executeQuery("select * from ANSWER where id_question = "
-				+ NumeroDePregunta + " and is_correct = true");
-		String TextoRespuesta = rs2.getString("text");
+			.executeQuery("select * from ANSWER where ID_QUESTION = "
+				+ NumeroDePregunta + " and IS_CORRECT = true");
+		String TextoRespuesta = rs2.getString("TEXT");
 		// Y muestro los resultados: La pregunta y la respuesta correcta
 		System.out.println("Pregunta nº(" + i + ") -> " + TextoPregunta
 			+ "?");
@@ -229,7 +229,7 @@ public class BBDD{
     }
 
     public void mejores5() {
-	String query = "SELECT score, date FROM test ORDER BY score DESC";
+	String query = "SELECT SCORE, DATE FROM TEST ORDER BY SCORE DESC";
 	try {
 	    Statement stm = con.createStatement();
 	    ResultSet rs = stm.executeQuery(query);
