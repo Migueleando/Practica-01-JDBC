@@ -113,7 +113,7 @@ public class BBDD {
 	    Statement stm = con.createStatement();
 	    ResultSet rs = stm.executeQuery(query);
 	    while(rs.next()){
-		System.out.println("Las cinco mejores puntuaciones son: "+rs);
+		System.out.println("Las cinco mejores puntuaciones son: "+rs.getInt("SCORE"));
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
