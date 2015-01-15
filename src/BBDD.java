@@ -8,6 +8,7 @@ public class BBDD {
     private Connection con;
     private int IdPregunta = 0;
     private int IdRespuesta = 0;
+    private int idTest = 0;
 
     public void EstablecerConexion() throws SQLException {
 	String url = "jdbc:mysql://localhost:3306/QUIZIT";
