@@ -8,7 +8,6 @@ public class BBDD {
     private Connection con;
     private int IdPregunta = 0;
     private int IdRespuesta = 0;
-    private int idTest = 0;
 
     public void EstablecerConexion() throws SQLException {
 	String url = "jdbc:mysql://localhost:3306/QUIZIT";
@@ -63,7 +62,7 @@ public class BBDD {
 	preparedStmtRespuesta1.setString(2, respuesta1.getText());
 	preparedStmtRespuesta1.setBoolean(3, respuesta1.isCorrect());
 
-	// Inserción de Respuesta 2
+	// Inserci�n de Respuesta 2
 	String queryANSWER2 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?, ?)";
 	PreparedStatement preparedStmtRespuesta2 = con
 		.prepareStatement(queryANSWER2);
@@ -72,7 +71,7 @@ public class BBDD {
 	preparedStmtRespuesta2.setString(2, respuesta1.getText());
 	preparedStmtRespuesta2.setBoolean(3, respuesta1.isCorrect());
 
-	// Inserción de Respuesta 3
+	// Inserci�n de Respuesta 3
 	String queryANSWER3 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?, ?)";
 	PreparedStatement preparedStmtRespuesta3 = con
 		.prepareStatement(queryANSWER3);
@@ -81,7 +80,7 @@ public class BBDD {
 	preparedStmtRespuesta3.setString(2, respuesta1.getText());
 	preparedStmtRespuesta3.setBoolean(3, respuesta1.isCorrect());
 
-	// Inserción de Respuesta 4
+	// Inserci�n de Respuesta 4
 	String queryANSWER4 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?, ?)";
 	PreparedStatement preparedStmtRespuesta4 = con
 		.prepareStatement(queryANSWER4);
@@ -100,28 +99,27 @@ public class BBDD {
 	// Cerramos la conexion
 	con.close();
     }
-    
-    /**
-	 * Método que genera un nuevo test con 5 preguntas aleatorias
-	 * @throws SQLException 
-	 * 
-	*/
-	
-	public void generarTest (Test test, Question pregunta) throws SQLException {
-		
-		String queryTEST = " select QUESTION(ID, TEXT) values (?, ?)";
-	    PreparedStatement preparedStmtTest = con.prepareStatement(queryTEST);
-	    idTest++;
-	    preparedStmtTest.setInt    (1, idTest);
-	    preparedStmtTest.setString (2, pregunta.getText());
-	    
-	    con.close();
-	}
 
     // Consulta 2
 
     // Consulta 3
 
     // Consulta 4
+    // 5 mejores resultados
+    
+    public void mejores5(){
+	String query = "SELECT score, date FROM test ORDER BY score DESC";
+	try {
+	    Statement stm = con.createStatement();
+	    ResultSet rs = stm.executeQuery(query);
+	    while(rs.next()){
+		System.out.println("Las cinco mejores puntuaciones son: "+rs.getInt("SCORE"));
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+    }
+    
+    
 
 }
