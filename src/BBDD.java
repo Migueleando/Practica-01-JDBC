@@ -32,7 +32,7 @@ public class BBDD {
 
     /**
      * Metodo que recibe un objeto pregunta y 4 respuestas (en nuestro juego
-     * siempre hay 4 respuestas) y los añada a la base de datos
+     * siempre hay 4 respuestas) y los aÃ±ada a la base de datos
      * 
      * @param pregunta
      * @param respuesta1
@@ -41,12 +41,12 @@ public class BBDD {
      * @param respuesta4
      * @throws SQLException
      */
-    public void AñadirPregunta(Question pregunta, Answer respuesta1,
+    public void AddQuestion(Question pregunta, Answer respuesta1,
 	    Answer respuesta2, Answer respuesta3, Answer respuesta4)
 	    throws SQLException {
 
 	// Insertamos en las tablas
-	// Inserción de Pregunta
+	// InserciÃ³n de Pregunta
 	String queryQUESTION = " insert into QUESTION (ID, TEXT) values (?, ?)";
 	PreparedStatement preparedStmtPregunta = con
 		.prepareStatement(queryQUESTION);
@@ -54,7 +54,7 @@ public class BBDD {
 	preparedStmtPregunta.setInt(1, IdPregunta);
 	preparedStmtPregunta.setString(2, pregunta.getText());
 
-	// Inserción de Respuesta 1
+	// InserciÃ³n de Respuesta 1
 	String queryANSWER1 = " insert into ANSWER (ID, TEXT, IS_CORRECT) values (?, ?, ?)";
 	PreparedStatement preparedStmtRespuesta1 = con
 		.prepareStatement(queryANSWER1);
@@ -63,7 +63,7 @@ public class BBDD {
 	preparedStmtRespuesta1.setString(2, respuesta1.getText());
 	preparedStmtRespuesta1.setBoolean(3, respuesta1.isCorrect());
 
-	// Inserción de Respuesta 2
+	// InserciÃ³n de Respuesta 2
 	String queryANSWER2 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?, ?)";
 	PreparedStatement preparedStmtRespuesta2 = con
 		.prepareStatement(queryANSWER2);
@@ -72,7 +72,7 @@ public class BBDD {
 	preparedStmtRespuesta2.setString(2, respuesta1.getText());
 	preparedStmtRespuesta2.setBoolean(3, respuesta1.isCorrect());
 
-	// Inserción de Respuesta 3
+	// InserciÃ³n de Respuesta 3
 	String queryANSWER3 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?, ?)";
 	PreparedStatement preparedStmtRespuesta3 = con
 		.prepareStatement(queryANSWER3);
@@ -81,7 +81,7 @@ public class BBDD {
 	preparedStmtRespuesta3.setString(2, respuesta1.getText());
 	preparedStmtRespuesta3.setBoolean(3, respuesta1.isCorrect());
 
-	// Inserción de Respuesta 4
+	// InserciÃ³n de Respuesta 4
 	String queryANSWER4 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?, ?)";
 	PreparedStatement preparedStmtRespuesta4 = con
 		.prepareStatement(queryANSWER4);
@@ -100,34 +100,36 @@ public class BBDD {
 	// Cerramos la conexion
 	con.close();
     }
-
-    /**
-     * Método que genera un nuevo test con 5 preguntas aleatorias
-     * 
-     * @throws SQLException
-     * 
-     */
-
-    public void generarTest(Test test, Question pregunta) throws SQLException {
-
-	String queryTEST = " select QUESTION(ID, TEXT) values (?, ?)";
-	PreparedStatement preparedStmtTest = con.prepareStatement(queryTEST);
-	idTest++;
-	preparedStmtTest.setInt(1, idTest);
-	preparedStmtTest.setString(2, pregunta.getText());
-	ResultSet rs = preparedStmtTest.executeQuery(queryTEST);
-	while (rs.next()) {
-	    System.out.println("Las cinco preguntas son: " + rs);
-	}
-
-	con.close();
-    }
-
-    // Consulta 2
-
-    // Consulta 3
-
-    // Consulta 4
+	
+	/**
+	 * Metodo que imprime todas las preguntas y la respuesta correcta
+	 * @param Categoria
+	 * @throws SQLException 
+	 */
+	public void ConsultarPreguntasYRespuestas () throws SQLException {
+		int i = 0;
+		try {
+			// Consultamos las la tabla Answer		
+			Statement stmt1 = con.createStatement();
+			ResultSet rs1 = stmt1.executeQuery("select * from QUESTION");
+			// Para cada resultado devuelto me guardo el id_question y la pregunta
+			while (rs1.next()) {			
+				int NumeroDePregunta = rs1.getInt("id_question");
+				String TextoPregunta = rs1.getString("text");
+				// Y saco todas las respuestas pertenecientes a dicha pregunta y que sean correctas (sera solo 1)
+				Statement stmt2 = con.createStatement();
+				ResultSet rs2 = stmt2.executeQuery("select * from ANSWER where id_question = " + NumeroDePregunta + " and is_correct = true");				
+				String TextoRespuesta = rs2.getString("text");
+				// Y muestro los resultados: La pregunta y la respuesta correcta
+				System.out.println("Pregunta nï¿½("+i+") -> " + TextoPregunta + "?");
+				i++;
+				System.out.println("- " + TextoRespuesta + " <-- Correcta" +"\n");				  
+				}
+		} finally {
+			con.close();
+		}
+	}	
+    
     public void mejores5() {
 	String query = "SELECT score, date FROM test ORDER BY score DESC";
 	try {
@@ -141,5 +143,4 @@ public class BBDD {
 	    e.printStackTrace();
 	}
     }
-
 }
