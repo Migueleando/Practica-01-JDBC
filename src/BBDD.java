@@ -105,5 +105,20 @@ public class BBDD {
     // Consulta 3
 
     // Consulta 4
+    // 5 mejores resultados
+    
+    public void mejores5(){
+	String query = "SELECT score, date FROM test ORDER BY score DESC";
+	try {
+	    Statement stm = con.createStatement();
+	    ResultSet rs = stm.executeQuery(query);
+	    while(rs.next()){
+		System.out.println("Las cinco mejores puntuaciones son: "+rs);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+    }
+    
 
 }
