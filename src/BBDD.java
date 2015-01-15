@@ -100,32 +100,46 @@ public class BBDD {
 	// Cerramos la conexion
 	con.close();
     }
-    
+
     /**
-	 * Método que genera un nuevo test con 5 preguntas aleatorias
-	 * @throws SQLException 
-	 * 
-	*/
-	
-	public void generarTest (Test test, Question pregunta) throws SQLException {
-		
-		String queryTEST = " select QUESTION(ID, TEXT) values (?, ?)";
-	    PreparedStatement preparedStmtTest = con.prepareStatement(queryTEST);
-	    idTest++;
-	    preparedStmtTest.setInt    (1, idTest);
-	    preparedStmtTest.setString (2, pregunta.getText());
-	    ResultSet rs = preparedStmtTest.executeQuery(queryTEST);
-		while (rs.next()) {
-			System.out.println("Las cinco preguntas son: " + rs);
-		}
-		
-	    con.close();
+     * Método que genera un nuevo test con 5 preguntas aleatorias
+     * 
+     * @throws SQLException
+     * 
+     */
+
+    public void generarTest(Test test, Question pregunta) throws SQLException {
+
+	String queryTEST = " select QUESTION(ID, TEXT) values (?, ?)";
+	PreparedStatement preparedStmtTest = con.prepareStatement(queryTEST);
+	idTest++;
+	preparedStmtTest.setInt(1, idTest);
+	preparedStmtTest.setString(2, pregunta.getText());
+	ResultSet rs = preparedStmtTest.executeQuery(queryTEST);
+	while (rs.next()) {
+	    System.out.println("Las cinco preguntas son: " + rs);
 	}
+
+	con.close();
+    }
 
     // Consulta 2
 
     // Consulta 3
 
     // Consulta 4
+    public void mejores5() {
+	String query = "SELECT score, date FROM test ORDER BY score DESC";
+	try {
+	    Statement stm = con.createStatement();
+	    ResultSet rs = stm.executeQuery(query);
+	    while (rs.next()) {
+		System.out.println("Las cinco mejores puntuaciones son: "
+			+ rs.getInt("SCORE"));
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+    }
 
 }
