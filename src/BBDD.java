@@ -225,7 +225,7 @@ public class BBDD{
 
 	} else
 	    System.out.println("El usuario no existe.");
-
+	con.close();
     }
 
     public void mejores5() {
@@ -236,6 +236,7 @@ public class BBDD{
 	    while (rs.next()) {
 		System.out.println("Las cinco mejores puntuaciones son: "
 			+ rs.getInt("SCORE"));
+		con.close();
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
