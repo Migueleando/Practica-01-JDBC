@@ -31,7 +31,7 @@ public class BBDD {
 
     /**
      * Metodo que recibe un objeto pregunta y 4 respuestas (en nuestro juego
-     * siempre hay 4 respuestas) y los a馻da a la base de datos
+     * siempre hay 4 respuestas) y los a帽ada a la base de datos
      * 
      * @param pregunta
      * @param respuesta1
@@ -40,12 +40,12 @@ public class BBDD {
      * @param respuesta4
      * @throws SQLException
      */
-    public void A馻dirPregunta(Question pregunta, Answer respuesta1,
+    public void A帽adirPregunta(Question pregunta, Answer respuesta1,
 	    Answer respuesta2, Answer respuesta3, Answer respuesta4)
 	    throws SQLException {
 
 	// Insertamos en las tablas
-	// Inserci髇 de Pregunta
+	// Inserci贸n de Pregunta
 	String queryQUESTION = " insert into QUESTION (ID, TEXT) values (?, ?)";
 	PreparedStatement preparedStmtPregunta = con
 		.prepareStatement(queryQUESTION);
@@ -53,7 +53,7 @@ public class BBDD {
 	preparedStmtPregunta.setInt(1, IdPregunta);
 	preparedStmtPregunta.setString(2, pregunta.getText());
 
-	// Inserci髇 de Respuesta 1
+	// Inserci贸n de Respuesta 1
 	String queryANSWER1 = " insert into ANSWER (ID, TEXT, IS_CORRECT) values (?, ?, ?)";
 	PreparedStatement preparedStmtRespuesta1 = con
 		.prepareStatement(queryANSWER1);
@@ -62,7 +62,7 @@ public class BBDD {
 	preparedStmtRespuesta1.setString(2, respuesta1.getText());
 	preparedStmtRespuesta1.setBoolean(3, respuesta1.isCorrect());
 
-	// Inserci髇 de Respuesta 2
+	// Inserci贸n de Respuesta 2
 	String queryANSWER2 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?, ?)";
 	PreparedStatement preparedStmtRespuesta2 = con
 		.prepareStatement(queryANSWER2);
@@ -71,7 +71,7 @@ public class BBDD {
 	preparedStmtRespuesta2.setString(2, respuesta1.getText());
 	preparedStmtRespuesta2.setBoolean(3, respuesta1.isCorrect());
 
-	// Inserci髇 de Respuesta 3
+	// Inserci贸n de Respuesta 3
 	String queryANSWER3 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?, ?)";
 	PreparedStatement preparedStmtRespuesta3 = con
 		.prepareStatement(queryANSWER3);
@@ -80,7 +80,7 @@ public class BBDD {
 	preparedStmtRespuesta3.setString(2, respuesta1.getText());
 	preparedStmtRespuesta3.setBoolean(3, respuesta1.isCorrect());
 
-	// Inserci髇 de Respuesta 4
+	// Inserci贸n de Respuesta 4
 	String queryANSWER4 = " insert into ANSWER (TEXT, IS_CORRECT) values (?, ?, ?)";
 	PreparedStatement preparedStmtRespuesta4 = con
 		.prepareStatement(queryANSWER4);
@@ -99,6 +99,23 @@ public class BBDD {
 	// Cerramos la conexion
 	con.close();
     }
+    
+    /**
+	 * M茅todo que genera un nuevo test con 5 preguntas aleatorias
+	 * @throws SQLException 
+	 * 
+	*/
+	
+	public void generarTest (Test test, Question pregunta) throws SQLException {
+		
+		String queryTEST = " select QUESTION(ID, TEXT) values (?, ?)";
+	    PreparedStatement preparedStmtTest = con.prepareStatement(queryTEST);
+	    idTest++;
+	    preparedStmtTest.setInt    (1, idTest);
+	    preparedStmtTest.setString (2, pregunta.getText());
+	    
+	    con.close();
+	}
 
     // Consulta 2
 
